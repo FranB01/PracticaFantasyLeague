@@ -1,5 +1,7 @@
 package com.example.practicafantasyleague.datos
 
+import com.example.practicafantasyleague.R
+
 data class Pais(
     var nombre : String,
     var bandera : Int,

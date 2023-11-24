@@ -1,5 +1,6 @@
 package com.example.practicafantasyleague.datos
 
+import com.example.practicafantasyleague.R
 import java.util.Date
 
 data class PaisFantasy (

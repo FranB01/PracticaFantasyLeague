@@ -5,11 +5,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.painterResource
-import com.example.practicafantasyleague.datos.Pais
 import com.example.practicafantasyleague.datos.PaisFantasy
 
 @Composable
-fun PaisComponenteDetalles(paisFantasy: PaisFantasy) {
+fun PantallaPaisDetalle(paisFantasy: PaisFantasy) {
     Column {
         Text(text = "${paisFantasy.pais.nombre}, en el bando ${paisFantasy.bloque.name}, ")
         Image(painter = painterResource(id = paisFantasy.pais.imagen), contentDescription = null)

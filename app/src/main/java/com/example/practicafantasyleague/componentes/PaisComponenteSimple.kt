@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Text
@@ -47,12 +48,14 @@ fun PaisComponenteSimple(paisFantasy: PaisFantasy) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.background(colorFondo)
+            .padding(6.dp)
     ) {
         Image(
-            painter = painterResource(id = paisFantasy.pais.imagen),
+            painter = painterResource(id = paisFantasy.pais.bandera),
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier.clip(CircleShape)
+                .size(80.dp)
         )
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,

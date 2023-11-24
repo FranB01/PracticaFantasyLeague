@@ -4,7 +4,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Text
@@ -12,15 +11,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.practicafantasyleague.R
 import com.example.practicafantasyleague.datos.Bloque
 import com.example.practicafantasyleague.datos.Equipamiento
-import com.example.practicafantasyleague.datos.Pais
+import com.example.practicafantasyleague.datos.ListaPaises
 import com.example.practicafantasyleague.datos.PaisFantasy
 import com.example.practicafantasyleague.ui.theme.Amarillo
 import com.example.practicafantasyleague.ui.theme.Azul
@@ -30,7 +27,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 
 @Composable
-fun PaisComponente(paisFantasy: PaisFantasy) {
+fun PaisComponenteSimple(paisFantasy: PaisFantasy) {
     val colorFondo = when (paisFantasy.bloque) {
         Bloque.OCCIDENTE -> Azul
         Bloque.BLOQUE_RUSO -> Verde
@@ -66,10 +63,10 @@ fun formatoFecha(fecha : Date) : String{
 
 @Preview
 @Composable
-fun previewPaisComponente() {
-    PaisComponente(
+fun previewPaisComponenteSimple() {
+    PaisComponenteSimple(
         paisFantasy = PaisFantasy(
-            Pais("Espiña", R.drawable.spain, R.drawable.spain, ""), Bloque.OCCIDENTE,
+            ListaPaises.spain, Bloque.OCCIDENTE,
             ArrayList<Equipamiento>(), 14, "Francia", Date(10)
         )
     )

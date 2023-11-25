@@ -29,6 +29,8 @@ import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.practicafantasyleague.datos.Alianza
 import com.example.practicafantasyleague.datos.ListaPaisesFantasy
 import com.example.practicafantasyleague.datos.PaisFantasy
@@ -41,7 +43,7 @@ fun <T> SnapshotStateList<T>.swapList(newList: List<T>) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PantallaListaPaises() {
+fun PantallaListaPaises(navController: NavHostController) {
     var listaPaisesFantasy = remember { mutableStateListOf<PaisFantasy>() }
     listaPaisesFantasy.swapList(ListaPaisesFantasy.lista)
 
@@ -57,7 +59,7 @@ fun PantallaListaPaises() {
         listaPaisesFantasy.swapList(ListaPaisesFantasy.lista)
     }
 
-    fun modoEliminar(){
+    fun modoEliminar() {
         // TODO
     }
 
@@ -104,12 +106,15 @@ fun PantallaListaPaises() {
                 if (alianzaSeleccionada == null) { // si no hay alianza seleccionada
                     PaisComponenteSimple(
                         paisFantasy = listaPaisesFantasy.get(it), // todos los paises
-                        modoEliminar = modoEliminar)
+                        modoEliminar = modoEliminar,
+                        eventoClick = { navController.navigate("Detalle/$it") },
+                    )
                 } else {
                     if (listaPaisesFantasy.get(it).alianza == alianzaSeleccionada) {
                         PaisComponenteSimple(
                             paisFantasy = listaPaisesFantasy.get(it), // solo los paises de la alianza elegida
-                            modoEliminar = modoEliminar
+                            modoEliminar = modoEliminar,
+                            eventoClick = { navController.navigate("Detalle/$it") },
                         )
                     }
                 }
@@ -155,7 +160,7 @@ fun previewPantallaListaPaises() {
     ListaPaisesFantasy.cargarLista()
     PracticaFantasyLeagueTheme {
         Surface {
-            PantallaListaPaises()
+            PantallaListaPaises(rememberNavController())
         }
     }
 }

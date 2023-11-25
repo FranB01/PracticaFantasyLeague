@@ -2,6 +2,7 @@ package com.example.practicafantasyleague.componentes
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -38,9 +39,14 @@ import java.text.SimpleDateFormat
 import java.util.Date
 
 @Composable
-fun PaisComponenteSimple(paisFantasy: PaisFantasy, modoEliminar : Boolean) {
+fun PaisComponenteSimple(
+    paisFantasy: PaisFantasy,
+    modoEliminar: Boolean,
+    eventoClick: () -> Unit,
+) {
     var seleccionado by remember { mutableStateOf(false) }
     var visible by remember { mutableStateOf(modoEliminar) }
+
 
     val colorFondo = when (paisFantasy.alianza) {
         Alianza.OCCIDENTE -> Azul
@@ -50,7 +56,7 @@ fun PaisComponenteSimple(paisFantasy: PaisFantasy, modoEliminar : Boolean) {
     }
 
     // si se le da un valor se asigna, si no es un toggle
-    fun setVisible(valor : Boolean?){
+    fun setVisible(valor: Boolean?) {
         visible = valor ?: !visible
         if (!visible) seleccionado = false // si es "invisible" se resetea
     }
@@ -62,6 +68,7 @@ fun PaisComponenteSimple(paisFantasy: PaisFantasy, modoEliminar : Boolean) {
             .background(colorFondo)
             .padding(6.dp)
             .fillMaxWidth()
+            .clickable { eventoClick }
     ) {
         Image(
             painter = painterResource(id = paisFantasy.pais.bandera),
@@ -80,7 +87,7 @@ fun PaisComponenteSimple(paisFantasy: PaisFantasy, modoEliminar : Boolean) {
             Text(text = "${paisFantasy.batallasGanadas} batallas ganadas")
         }
         // Checkbox solo visible cuando haga falta. Tamaño fijo para usar spacer para "desactivarlo".
-        if (visible){
+        if (visible) {
             Checkbox(
                 checked = seleccionado,
                 onCheckedChange = { seleccionado = !seleccionado },
@@ -107,7 +114,8 @@ fun PreviewPaisComponenteSimple() {
                     ListaPaises.spain, Alianza.OCCIDENTE,
                     ArrayList<Equipamiento>(), 14, "Francia", Date(10),
                 ),
-                modoEliminar = false
+                modoEliminar = false,
+                eventoClick = {},
             )
         }
     }

@@ -1,27 +1,41 @@
 package com.example.practicafantasyleague.datos
 
+import java.util.Date
+
 class ListaPaisesFantasy {
-    fun calcularEstadisticas(paisFantasy: PaisFantasy) {
-        var i = 0 // Contador
-        var mediaBatallas: Double
+    fun mediaBatallas(pais : Pais) : Double{
+        var i = 0
         var batallasTotal = 0
-        var maxBatallasGanadas = 0
-        lista.forEach { paisLista ->
-            if (paisLista == paisFantasy) {
-                batallasTotal += paisLista.batallasGanadas
-                if (maxBatallasGanadas < paisLista.batallasGanadas) {
-                    maxBatallasGanadas = paisLista.batallasGanadas
-                }
+        lista.forEach { paisFantasyLista ->
+            if (pais == paisFantasyLista.pais){
+                batallasTotal += paisFantasyLista.batallasGanadas
                 i++
             }
         }
+        return (batallasTotal.toDouble() / i.toDouble())
+    }
 
-        mediaBatallas = (batallasTotal.toDouble()) / (i.toDouble())
+    fun batallasMaximasGanadas(pais: Pais) : Int{
+        var maxGanadas = 0
+        lista.forEach { paisFantasyLista ->
+            if (pais == paisFantasyLista.pais){
+                if (paisFantasyLista.batallasGanadas > maxGanadas) {
+                    maxGanadas = paisFantasyLista.batallasGanadas
+                }
+            }
+        }
+        return maxGanadas
     }
 
     companion object {
         var lista = ArrayList<PaisFantasy>()
 
+        fun cargarLista(){
+            lista.add(paisF1)
+
+        }
+
+        val paisF1 = PaisFantasy(ListaPaises.spain, Alianza.OCCIDENTE, ArrayList<Equipamiento>(), 14, "Francia", Date(100000))
 
     }
 }

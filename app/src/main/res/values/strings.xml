@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">PracticaFantasyLeague</string>
+
+    <string name="descripcion_spain">España es un país ubicado en la península ibérica, en el suroeste
+        de Europa. Limita al norte con el Mar Cantábrico y los Pirineos, al este y sureste con el Mar
+        Mediterráneo, al sur con Gibraltar y el Mar de Alborán, y al oeste y noroeste con Portugal y el
+        océano Atlántico. Con una rica historia que abarca desde la época de los romanos hasta la Edad
+        Media y más allá, España ha influido significativamente en la cultura mundial. Su capital es
+        Madrid, y el país se organiza en 17 comunidades autónomas con distintas identidades culturales
+        y lingüísticas, destacando el catalán, el vasco y el gallego. España es conocida por su diversidad
+        geográfica, que va desde las soleadas playas mediterráneas hasta las altas montañas de los Pirineos
+        y las Picos de Europa. Además, la cultura española se caracteriza por su pasión por la música,
+        la danza, la gastronomía y las festividades vibrantes.</string>
+    <string name="descripcion_italia">Italia, situada en el corazón del Mediterráneo, es una nación encantadora que combina una rica historia con una vibrante cultura y una belleza natural impresionante. Conocida por su legado artístico, arquitectónico y gastronómico, Italia ha dejado una huella indeleble en el mundo. Desde los antiguos monumentos romanos como el Coliseo hasta las obras maestras renacentistas de artistas como Leonardo da Vinci y Miguel Ángel, el país respira historia y arte en cada rincón. Sus ciudades icónicas, como Roma, Florencia y Venecia, son testigos de la grandeza de civilizaciones pasadas. Además, Italia es famosa por su exquisita cocina, que incluye pasta, pizza, gelato y una variedad de delicias regionales. Sus paisajes pintorescos, que van desde las colinas de la Toscana hasta la costa de Amalfi, añaden un toque de belleza natural a la mezcla. Italia, con su estilo de vida apasionado y su diversidad cultural, sigue siendo un destino cautivador para aquellos que buscan sumergirse en la riqueza de la historia y la sofisticación contemporánea.</string>
+    <string name="descripcion_venezuela">Venezuela, ubicada en la parte norte de América del Sur, es un país con una rica diversidad geográfica que abarca desde extensas llanuras hasta imponentes cadenas montañosas. Sin embargo, en los últimos años, la nación ha enfrentado desafíos significativos, incluyendo una profunda crisis económica y política. La caída de los precios del petróleo, una de las principales fuentes de ingresos del país, ha exacerbado las tensiones económicas, dando lugar a hiperinflación, escasez de bienes básicos y una migración masiva de venezolanos en busca de mejores condiciones de vida. </string>
+
+
 </resources>

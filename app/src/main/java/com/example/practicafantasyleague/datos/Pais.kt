@@ -6,5 +6,5 @@ data class Pais(
     var nombre : String,
     var bandera : Int, // https:///
     var imagen : Int, // solo para la vista detallada
-    var descripcion : String, // solo para la vista detallada
+    var descripcion : Int, // solo para la vista detallada
 )

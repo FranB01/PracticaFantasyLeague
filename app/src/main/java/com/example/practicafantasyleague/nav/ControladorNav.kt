@@ -19,7 +19,7 @@ fun ControladorNav() {
     NavHost(navController = navController, startDestination = Rutas.PantallaListaPaises.ruta) {
 
         composable(Rutas.PantallaListaPaises.ruta) {
-            PantallaListaPaises()
+            PantallaListaPaises(navController = navController)
         }
 
         composable(

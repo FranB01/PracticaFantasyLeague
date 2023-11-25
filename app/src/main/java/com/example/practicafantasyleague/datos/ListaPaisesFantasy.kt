@@ -9,10 +9,11 @@ class ListaPaisesFantasy {
 
         fun cargarLista(){
             lista.add(paisF1)
+            lista.add(paisF2)
         }
 
         val paisF1 = PaisFantasy(ListaPaises.spain, Alianza.OCCIDENTE, ArrayList<Equipamiento>(), 14, "Francia", Date(100000))
-
+        val paisF2 = PaisFantasy(ListaPaises.venezuela, Alianza.BLOQUE_RUSO, ArrayList<Equipamiento>(), 7, "Alemania", Date(10000000))
 
         fun guerrasTotales(pais : Pais) : Int{
             var i = 0

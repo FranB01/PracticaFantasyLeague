@@ -4,8 +4,8 @@ import com.example.practicafantasyleague.R
 
 class ListaPaises{
     companion object{
-        fun cargarLista(): ArrayList<Pais>{
-            var lista = ArrayList<Pais>()
+        var lista = ArrayList<Pais>()
+        fun cargarLista(){
             lista.add(spain)
             lista.add(italia)
             lista.add(venezuela)
@@ -13,8 +13,6 @@ class ListaPaises{
             lista.add(usa)
             lista.add(china)
             lista.add(brasil)
-
-            return lista
         }
 
         val spain = Pais(
@@ -30,7 +28,7 @@ class ListaPaises{
         )
 
         val mongolia = Pais(
-            "Mongolia", R.drawable.mongolia_flag, R.drawable.HUUUUUMMMMMMRRRRRRRRRR, R.string.descripcion_mongolia
+            "Mongolia", R.drawable.mongolia_flag, R.drawable.throat_singing, R.string.descripcion_mongolia
         )
 
         val usa = Pais(

@@ -16,7 +16,7 @@ class ListaPaises{
         }
 
         val spain = Pais(
-            "España", R.drawable.spain, R.drawable.sevilla, R.string.descripcion_spain
+            "España", R.drawable.spain, R.drawable.callarse_catalufos_hd, R.string.descripcion_spain
         )
 
         val italia = Pais(

@@ -144,8 +144,6 @@ fun PantallaListaPaises(navController: NavHostController) {
                             navController.navigate("Detalle/$it")
                         }
                     )
-                    //navController = navController
-
                 }
             }
         }

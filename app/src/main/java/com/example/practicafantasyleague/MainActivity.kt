@@ -10,12 +10,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.practicafantasyleague.datos.ListaPaises
+import com.example.practicafantasyleague.datos.ListaPaisesFantasy
 import com.example.practicafantasyleague.nav.ControladorNav
 import com.example.practicafantasyleague.ui.theme.PracticaFantasyLeagueTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        ListaPaises.cargarLista()
+        ListaPaisesFantasy.cargarLista()
         setContent {
             PracticaFantasyLeagueTheme {
                 // A surface container using the 'background' color from the theme

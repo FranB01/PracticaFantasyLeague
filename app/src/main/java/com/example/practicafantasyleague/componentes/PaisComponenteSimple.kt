@@ -1,5 +1,7 @@
 package com.example.practicafantasyleague.componentes
 
+import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -26,9 +28,13 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.practicafantasyleague.datos.Alianza
 import com.example.practicafantasyleague.datos.Equipamiento
 import com.example.practicafantasyleague.datos.ListaPaises
+import com.example.practicafantasyleague.datos.ListaPaisesFantasy
 import com.example.practicafantasyleague.datos.PaisFantasy
 import com.example.practicafantasyleague.ui.theme.Amarillo
 import com.example.practicafantasyleague.ui.theme.Azul
@@ -43,10 +49,10 @@ fun PaisComponenteSimple(
     paisFantasy: PaisFantasy,
     modoEliminar: Boolean,
     eventoClick: () -> Unit,
+    //navController : NavController,
 ) {
     var seleccionado by remember { mutableStateOf(false) }
     var visible by remember { mutableStateOf(modoEliminar) }
-
 
     val colorFondo = when (paisFantasy.alianza) {
         Alianza.OCCIDENTE -> Azul
@@ -65,10 +71,15 @@ fun PaisComponenteSimple(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier
+            .clickable {
+                eventoClick
+                //val destino = ListaPaisesFantasy.lista.indexOf(paisFantasy)
+                //navController.navigate("Detalle/${destino}}")
+                Log.i("info", "(interior) Se clickó ${paisFantasy.pais.nombre}")
+            }
             .background(colorFondo)
-            .padding(6.dp)
             .fillMaxWidth()
-            .clickable { eventoClick }
+            .padding(6.dp)
     ) {
         Image(
             painter = painterResource(id = paisFantasy.pais.bandera),
@@ -99,6 +110,7 @@ fun PaisComponenteSimple(
     }
 }
 
+@SuppressLint("SimpleDateFormat")
 fun formatoFecha(fecha: Date): String {
     val sdf = SimpleDateFormat("dd-MM-yyyy")
     return sdf.format(fecha)
@@ -112,10 +124,11 @@ fun PreviewPaisComponenteSimple() {
             PaisComponenteSimple(
                 paisFantasy = PaisFantasy(
                     ListaPaises.spain, Alianza.OCCIDENTE,
-                    ArrayList<Equipamiento>(), 14, "Francia", Date(10),
+                    ArrayList(), 14, "Francia", Date(10),
                 ),
                 modoEliminar = false,
                 eventoClick = {},
+                //navController = rememberNavController()
             )
         }
     }

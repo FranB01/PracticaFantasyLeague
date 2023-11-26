@@ -1,5 +1,6 @@
 package com.example.practicafantasyleague.componentes
 
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -69,24 +70,23 @@ fun PantallaListaPaises(navController: NavHostController) {
     ) {
         SearchBar(
             query = textoBarra,
-            onQueryChange = {
-                textoBarra = it
-            },
-            onSearch = {
-                barraActiva = false
-            },
+            onQueryChange = { textoBarra = it },
+            onSearch = { barraActiva = false },
             active = barraActiva,
-            onActiveChange = {
-                barraActiva = it
-            },
+            onActiveChange = { barraActiva = it },
             placeholder = { Text(text = "Buscar") },
             leadingIcon = {
                 if (barraActiva) { // solo sale el boton de cerrar si estamos en la barra
                     Icon(
                         imageVector = Icons.Filled.Clear,
                         contentDescription = "Borrar",
-                        modifier = Modifier.clickable { // Borra el texto
-                            textoBarra = ""
+                        modifier = Modifier.clickable { // Borra el texto, si esta vacio cierra la barra
+                            if (textoBarra != "") {
+                                textoBarra = ""
+                                alianzaSeleccionada = null
+                            } else {
+                                barraActiva = false
+                            }
                         }
                     )
                 }
@@ -95,7 +95,16 @@ fun PantallaListaPaises(navController: NavHostController) {
             modifier = Modifier.fillMaxWidth()
         ) {
             Alianza.values().forEach { // lista de alianzas
-                Row(modifier = Modifier.padding(2.dp)) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(6.dp)
+                        .clickable {
+                            barraActiva = false
+                            textoBarra = it.toString()
+                            alianzaSeleccionada = it
+                        }
+                ) {
                     Text(text = it.toString())
                 }
             }
@@ -103,20 +112,16 @@ fun PantallaListaPaises(navController: NavHostController) {
 
         LazyColumn(Modifier.weight(1f)) {
             items(count = listaPaisesFantasy.size) {
-                if (alianzaSeleccionada == null) { // si no hay alianza seleccionada
+                if (alianzaSeleccionada == null || listaPaisesFantasy[it].alianza == alianzaSeleccionada) { // si no hay alianza seleccionada
                     PaisComponenteSimple(
                         paisFantasy = listaPaisesFantasy.get(it), // todos los paises
                         modoEliminar = modoEliminar,
-                        eventoClick = { navController.navigate("Detalle/$it") },
+                        eventoClick = {
+                            navController.navigate("Detalle/$it")
+                            Log.i("info", "Clickado componente nº $it")
+                        },
+                        //navController = navController
                     )
-                } else {
-                    if (listaPaisesFantasy.get(it).alianza == alianzaSeleccionada) {
-                        PaisComponenteSimple(
-                            paisFantasy = listaPaisesFantasy.get(it), // solo los paises de la alianza elegida
-                            modoEliminar = modoEliminar,
-                            eventoClick = { navController.navigate("Detalle/$it") },
-                        )
-                    }
                 }
             }
         }

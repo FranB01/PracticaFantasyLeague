@@ -117,11 +117,12 @@ fun PantallaListaPaises(navController: NavHostController) {
                         paisFantasy = listaPaisesFantasy.get(it), // todos los paises
                         modoEliminar = modoEliminar,
                         eventoClick = {
+                            Log.i("info", "(Exterior) Clickado componente nº $it")
                             navController.navigate("Detalle/$it")
-                            Log.i("info", "Clickado componente nº $it")
-                        },
-                        //navController = navController
+                        }
                     )
+                    //navController = navController
+
                 }
             }
         }
@@ -133,7 +134,7 @@ fun PantallaListaPaises(navController: NavHostController) {
         ) {
             // boton añadir
             FloatingActionButton(
-                onClick = { /*TODO*/ },
+                onClick = { navController.navigate("Nuevo") },
                 Modifier.padding(horizontal = 20.dp)
             ) {
                 Row(

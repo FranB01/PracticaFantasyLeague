@@ -22,7 +22,7 @@ fun PantallaPaisDetalle(
     paisFantasy: PaisFantasy
 ) {
     Column(
-        Modifier.background(PurpleGrey80)
+        //Modifier.background(PurpleGrey80)
     ) {
         Text(text = "${paisFantasy.pais.nombre}, en el bando ${paisFantasy.alianza.name}")
         Image(painter = painterResource(id = paisFantasy.pais.imagen), contentDescription = null)

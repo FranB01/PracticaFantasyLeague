@@ -72,7 +72,7 @@ fun PaisComponenteSimple(
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier
             .clickable {
-                eventoClick
+                eventoClick.invoke()
                 //val destino = ListaPaisesFantasy.lista.indexOf(paisFantasy)
                 //navController.navigate("Detalle/${destino}}")
                 Log.i("info", "(interior) Se clickó ${paisFantasy.pais.nombre}")

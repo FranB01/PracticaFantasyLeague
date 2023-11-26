@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxColors
@@ -22,10 +23,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import com.example.practicafantasyleague.datos.Alianza
 import com.example.practicafantasyleague.datos.Equipamiento
 import com.example.practicafantasyleague.datos.ListaPaises
@@ -48,7 +51,7 @@ class PantallaNuevoPaisViewModel : ViewModel() {
 
 
 @Composable
-fun PantallaNuevoPais() {
+fun PantallaNuevoPais(navController: NavController) {
     var equipamiento by remember { mutableStateOf(ArrayList<Equipamiento>()) }
     val viewModel : PantallaNuevoPaisViewModel = viewModel()
 
@@ -118,7 +121,10 @@ fun CheckBoxEquipamiento(equipamiento: Equipamiento) {
     var seleccionado by remember { mutableStateOf(false) }
     val viewModel : PantallaNuevoPaisViewModel = viewModel()
 
-    Row {
+    Row (
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier.fillMaxWidth()
+    ){
         Checkbox(
             checked = seleccionado,
             onCheckedChange = {

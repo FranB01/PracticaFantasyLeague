@@ -8,6 +8,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.practicafantasyleague.componentes.PantallaListaPaises
+import com.example.practicafantasyleague.componentes.PantallaNuevoPais
 import com.example.practicafantasyleague.componentes.PantallaPaisDetalle
 import com.example.practicafantasyleague.datos.ListaPaisesFantasy
 
@@ -30,6 +31,12 @@ fun ControladorNav() {
                 navController = navController,
                 paisFantasy = ListaPaisesFantasy.lista[it.arguments?.getInt("idPais")!!]
             )
+        }
+
+        composable(
+            "Nuevo",
+        ){
+            PantallaNuevoPais(navController = navController)
         }
 
 

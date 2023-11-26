@@ -27,7 +27,18 @@ fun PantallaPaisDetalle(
     Column(
         //Modifier.background(PurpleGrey80)
     ) {
-        Text(text = "${paisFantasy.pais.nombre}, en el bando ${paisFantasy.alianza.toString()}")
+        var textoEquipamiento = ""
+        paisFantasy.equipamiento.forEach(){
+            if (paisFantasy.equipamiento.last() != it){
+                textoEquipamiento += "$it, " // todos menos el último
+            } else {
+                textoEquipamiento += "$it." // el último
+            }
+        }
+
+
+        Text(text = "${paisFantasy.pais.nombre}, en el bando ${paisFantasy.alianza.toString()}. " +
+                "Usa como equipamiento: $textoEquipamiento\n")
         Image(
             painter = painterResource(id = paisFantasy.pais.imagen),
             contentDescription = null,

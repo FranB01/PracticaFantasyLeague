@@ -179,7 +179,7 @@ fun PantallaNuevoPais(navController: NavController) {
                     TextButton(onClick = {
                         calendarioVisible = false
                         fechaSeleccionada = datePickerState.selectedDateMillis!!
-                        textoFechaSeleccionado = SimpleDateFormat("dd MM yyyy", Locale.ROOT)
+                        textoFechaSeleccionado = SimpleDateFormat("dd/MM/yyyy", Locale.ROOT)
                                 .format(Date(fechaSeleccionada))
                     }) {
                         Text(text = "Confirmar")
@@ -288,22 +288,3 @@ fun CheckBoxEquipamiento(equipamiento: Equipamiento) {
     }
 
 }
-
-/*
-@Composable
-fun RadioButtonEquipamiento(texto : String){
-    var seleccionado by remember { mutableStateOf(false) }
-
-    Row{
-        RadioButton(selected = seleccionado, onClick = {
-            seleccionado = !seleccionado
-        })
-        Text(
-            text = texto,
-            modifier = Modifier.clickable {
-                seleccionado = !seleccionado
-            }
-        )
-    }
-}
- */

@@ -28,6 +28,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
@@ -51,8 +52,13 @@ fun PaisComponenteSimple(
     eventoClick: () -> Unit,
     //navController : NavController,
 ) {
+    val viewModel: PantallaListaPaisesViewModel = viewModel()
     var seleccionado by remember { mutableStateOf(false) }
     var visible by remember { mutableStateOf(modoEliminar) }
+    visible = modoEliminar
+    if (!visible) {
+        seleccionado = false
+    } // se resetea al hacerse invisible
 
     val colorFondo = when (paisFantasy.alianza) {
         Alianza.OCCIDENTE -> Azul
@@ -61,11 +67,6 @@ fun PaisComponenteSimple(
         Alianza.INDEPENDIENTE -> Amarillo
     }
 
-    // si se le da un valor se asigna, si no es un toggle
-    fun setVisible(valor: Boolean?) {
-        visible = valor ?: !visible
-        if (!visible) seleccionado = false // si es "invisible" se resetea
-    }
 
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -73,8 +74,6 @@ fun PaisComponenteSimple(
         modifier = Modifier
             .clickable {
                 eventoClick.invoke()
-                //val destino = ListaPaisesFantasy.lista.indexOf(paisFantasy)
-                //navController.navigate("Detalle/${destino}}")
                 Log.i("info", "(interior) Se clickó ${paisFantasy.pais.nombre}")
             }
             .background(colorFondo)
@@ -101,7 +100,10 @@ fun PaisComponenteSimple(
         if (visible) {
             Checkbox(
                 checked = seleccionado,
-                onCheckedChange = { seleccionado = !seleccionado },
+                onCheckedChange = {
+                    seleccionado = it
+                    viewModel.updateElementosSeleccionados(paisFantasy, it)
+                },
                 modifier = Modifier.size(30.dp)
             )
         } else {

@@ -21,6 +21,7 @@ import androidx.compose.material3.SearchBar
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -30,9 +31,12 @@ import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.practicafantasyleague.datos.Alianza
+import com.example.practicafantasyleague.datos.Equipamiento
 import com.example.practicafantasyleague.datos.ListaPaisesFantasy
 import com.example.practicafantasyleague.datos.PaisFantasy
 import com.example.practicafantasyleague.ui.theme.PracticaFantasyLeagueTheme
@@ -42,9 +46,30 @@ fun <T> SnapshotStateList<T>.swapList(newList: List<T>) {
     addAll(newList)
 }
 
+class PantallaListaPaisesViewModel : ViewModel() {
+    private val _paisesSeleccionados = mutableStateOf(emptyList<PaisFantasy>())
+    val paisesSeleccionados: State<List<PaisFantasy>> = _paisesSeleccionados
+
+    fun updateElementosSeleccionados(elemento: PaisFantasy, seleccionado: Boolean) {
+        _paisesSeleccionados.value = if (seleccionado) {
+            _paisesSeleccionados.value + elemento
+        } else {
+            _paisesSeleccionados.value - elemento
+        }
+    }
+
+    fun eliminar() {
+        _paisesSeleccionados.value.forEach {
+            ListaPaisesFantasy.lista.remove(it)
+            _paisesSeleccionados.value - it
+        }
+    }
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PantallaListaPaises(navController: NavHostController) {
+    val viewModel: PantallaListaPaisesViewModel = viewModel()
     var listaPaisesFantasy = remember { mutableStateListOf<PaisFantasy>() }
     listaPaisesFantasy.swapList(ListaPaisesFantasy.lista)
 
@@ -58,10 +83,6 @@ fun PantallaListaPaises(navController: NavHostController) {
         // Do something that updates the list
         // ...
         listaPaisesFantasy.swapList(ListaPaisesFantasy.lista)
-    }
-
-    fun modoEliminar() {
-        // TODO
     }
 
     Column(
@@ -95,17 +116,19 @@ fun PantallaListaPaises(navController: NavHostController) {
             modifier = Modifier.fillMaxWidth()
         ) {
             Alianza.values().forEach { // lista de alianzas
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(6.dp)
-                        .clickable {
-                            barraActiva = false
-                            textoBarra = it.toString()
-                            alianzaSeleccionada = it
-                        }
-                ) {
-                    Text(text = it.toString())
+                if (textoBarra == "" || it.toString().contains(other = textoBarra, ignoreCase = true)){
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(6.dp)
+                            .clickable {
+                                barraActiva = false
+                                textoBarra = it.toString()
+                                alianzaSeleccionada = it
+                            }
+                    ) {
+                        Text(text = it.toString())
+                    }
                 }
             }
         }
@@ -146,7 +169,13 @@ fun PantallaListaPaises(navController: NavHostController) {
             }
             // boton borrar
             FloatingActionButton(
-                onClick = { modoEliminar = !modoEliminar },
+                onClick = {
+                    if (modoEliminar) {
+                        viewModel.eliminar()
+                        listaPaisesFantasy.swapList(ListaPaisesFantasy.lista)
+                    }
+                    modoEliminar = !modoEliminar
+                },
                 Modifier.padding(horizontal = 20.dp)
             ) {
                 Row(
